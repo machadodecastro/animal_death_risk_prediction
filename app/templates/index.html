@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<HTML>
+<HEAD>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="UTF=8">
+	<title>App de Classificação de Risco de Descarte Animal</title>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+	<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    <style>
+    .slidecontainer {
+        width: 90%;
+    }
+
+    .slider {
+        -webkit-appearance: none;
+        width: 100%;
+        height: 15px;
+        border-radius: 5px;
+        background: #d3d3d3;
+        outline: none;
+        opacity: 0.7;
+        -webkit-transition: .2s;
+        transition: opacity .2s;
+    }
+
+    .slider:hover {
+        opacity: 1;
+    }
+
+    .slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        background: #4CAF50;
+        cursor: pointer;
+    }
+
+    .slider::-moz-range-thumb {
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        background: #4CAF50;
+        cursor: pointer;
+    }
+    </style>
+</HEAD>
+ 
+<BODY>
+    <div class="container">
+        <table  style="background-color:black;"> <tr><td>
+        <img src="static/imagens/logo.jpeg" alt="Logo" style='padding:1px; border:0px solid #021a40; width: 300px; height: 200px'>
+        </td> 
+        <td width="100%"> 
+        <h1><font color="white">  Medição do Índice de Descarte</font></h1>
+    </td> 
+    </tr> <table>
+    </div>
+
+    <table cellpadding="10">
+        <TR>
+            <td colspan="3"><H3>Selecione os fatores abaixo para obter a classificação do risco:</H3></td>
+        </TR>
+
+        <TR>
+         <TD width="35%"> 
+
+            <div class="slidecontainer">
+                <label>Black (0) ou Swiss (1): <span id="linhagem_value"></span></label>
+                <input type="range" min="0" max="1" value="0" class="slider" id="linhagem_range" step="1">
+            </div>
+
+            <div class="slidecontainer">
+                <label>Temperatura: <span id="temperatura_value"></span></label>
+                <input type="range" min="20" max="40" value="21" class="slider" id="temperatura_range" step="1">
+            </div>
+             
+            <div class="slidecontainer">
+                <label>Amônia: <span id="amonia_value"></span></label>
+                <input type="range" min="9" max="30" value="9" class="slider" id="amonia_range" step="1">
+            </div>
+
+            <div class="slidecontainer">
+                <label>Idade(dias): <span id="idade_value"></span></label>
+                <input type="range" min="21" max="730" value="21" class="slider" id="idade_range" step="1">
+            </div>
+
+            <div class="slidecontainer">
+                <label>Peso(g): <span id="peso_value"></span></label>
+                <input type="range" min="10" max="500" value="100" class="slider" id="peso_range" step="0.5">
+            </div>
+
+            <div class="slidecontainer">
+                <label>Sexo Fêmea (0) / Macho (1): <span id="sexo_value"></span></label>
+                <input type="range" min="0" max="1" value="0" class="slider" id="sexo_range" step="1">
+            </div>
+
+        </td>
+
+        <td width="30%"> 
+            <label>Risco de Descarte: <span id="estimated_quality"></span></label>
+             <p style="text-align:center">
+                <img src="static/imagens/imagem.jpg" alt="Risco de descarte animal" id="img_quality" style='padding:1px; border:1px solid #021a40; width: 100%; height: 100%'>
+             </p>
+        </td>
+
+         <td width="35%"> 
+
+
+            <div class="slidecontainer">
+                <label>Fotoperíodo(h): <span id="fotoperiodo_value"></span></label>
+                <input type="range" min="10" max="16" value="12" class="slider" id="fotoperiodo_range" step="2">
+            </div>
+
+            <div class="slidecontainer">
+                <label>Ruído(dB): <span id="ruido_value"></span></label>
+                <input type="range" min="10" max="80" value="35" class="slider" id="ruido_range" step="1">
+            </div>
+             
+            <div class="slidecontainer">
+                <label>Intensidade Luminosa (Lux): <span id="luz_value"></span></label>
+                <input type="range" min="60" max="300" value="100" class="slider" id="luz_range" step="1">
+            </div>
+
+            <div class="slidecontainer">
+                <label>Umidade: <span id="umidade_value"></span></label>
+                <input type="range" min="0" max="100" value="30" class="slider" id="umidade_range" step="1">
+            </div>
+             
+            <div class="slidecontainer">
+                <label>Infecções: <span id="infeccoes_value"></span></label>
+                <input type="range" min="0" max="1" value="0" class="slider" id="infeccoes_range" step="1">
+            </div>
+
+            <div class="slidecontainer">
+                <label>Animais por gaiola: <span id="animais_por_gaiola_value"></span></label>
+                <input type="range" min="1" max="5" value="5" class="slider" id="animais_por_gaiola_range" step="1">
+            </div>
+
+        </td>
+        </tr>
+        </table>
+    </p>
+
+</BODY>
+
+<script>
+    var slider1 = document.getElementById("temperatura_range");
+    var output1 = document.getElementById("temperatura_value");
+    output1.innerHTML = slider1.value;
+    slider1.oninput = function() {output1.innerHTML = this.value;}
+
+    var slider2 = document.getElementById("amonia_range");
+    var output2 = document.getElementById("amonia_value");
+    output2.innerHTML = slider2.value;
+    slider2.oninput = function() {output2.innerHTML = this.value;}
+
+    var slider3 = document.getElementById("idade_range");
+    var output3 = document.getElementById("idade_value");
+    output3.innerHTML = slider3.value;
+    slider3.oninput = function() {output3.innerHTML = this.value;}
+
+    var slider4 = document.getElementById("peso_range");
+    var output4 = document.getElementById("peso_value");
+    output4.innerHTML = slider4.value;
+    slider4.oninput = function() {output4.innerHTML = this.value;}
+
+    var slider5 = document.getElementById("sexo_range");
+    var output5 = document.getElementById("sexo_value");
+    output5.innerHTML = slider5.value;
+    slider5.oninput = function() {output5.innerHTML = this.value;}
+
+    var slider6 = document.getElementById("fotoperiodo_range");
+    var output6 = document.getElementById("fotoperiodo_value");
+    output6.innerHTML = slider6.value;
+    slider6.oninput = function() {output6.innerHTML = this.value;}
+
+    var slider7 = document.getElementById("ruido_range");
+    var output7 = document.getElementById("ruido_value");
+    output7.innerHTML = slider7.value;
+    slider7.oninput = function() {output7.innerHTML = this.value;}
+
+    var slider8 = document.getElementById("luz_range");
+    var output8 = document.getElementById("luz_value");
+    output8.innerHTML = slider8.value;
+    slider8.oninput = function() {output8.innerHTML = this.value;}
+
+    var slider9 = document.getElementById("umidade_range");
+    var output9 = document.getElementById("umidade_value");
+    output9.innerHTML = slider9.value;
+    slider9.oninput = function() {output9.innerHTML = this.value;}
+
+    var slider10 = document.getElementById("infeccoes_range");
+    var output10 = document.getElementById("infeccoes_value");
+    output10.innerHTML = slider10.value;
+    slider10.oninput = function() {output10.innerHTML = this.value;}
+
+    var slider11 = document.getElementById("animais_por_gaiola_range");
+    var output11 = document.getElementById("animais_por_gaiola_value");
+    output11.innerHTML = slider11.value;
+    slider11.oninput = function() {output11.innerHTML = this.value;}
+
+    var slider12 = document.getElementById("linhagem_range");
+    var output12 = document.getElementById("linhagem_value");
+    output12.innerHTML = slider12.value;
+    slider12.oninput = function() {output12.innerHTML = this.value;}
+
+    var logger = '';
+
+    // Função para atualizar a página com nova imagem
+    function atualiza_pagina(qualidade_prevista, image_name){
+        estimated_quality.innerHTML = qualidade_prevista;
+        img_quality.src = image_name; 
+    }
+         
+    // Função para obter os dados
+    function fetchdata()
+    {
+        // AJAX para comunicação dinâmica entre servidor e cliente
+        $.getJSON({
+            type : "GET",
+            url:"{{ url_for('background_process') }}",
+            data:{ 'temperatura': document.getElementById("temperatura_value").innerHTML,
+                   'amonia': document.getElementById("amonia_value").innerHTML,
+                   'idade': document.getElementById("idade_value").innerHTML,
+                   'peso': document.getElementById("peso_value").innerHTML,
+                   'sexo': document.getElementById("sexo_value").innerHTML,
+                   'fotoperiodo': document.getElementById("fotoperiodo_value").innerHTML,
+                   'ruido': document.getElementById("ruido_value").innerHTML,
+                   'luz': document.getElementById("luz_value").innerHTML,
+                   'umidade': document.getElementById("umidade_value").innerHTML,
+                   'infeccoes': document.getElementById("infeccoes_value").innerHTML,
+                   'animais_por_gaiola': document.getElementById("animais_por_gaiola_value").innerHTML,
+                   'linhagem': document.getElementById("linhagem_value").innerHTML},
+            success: function(data){
+                logger = data.qualidade_prevista;
+                atualiza_pagina(data.qualidade_prevista, data.image_name);}
+             
+        });
+    }
+
+    // Evento listener para capturar os movimentos do mouse
+    document.addEventListener ("mouseup", function () {fetchdata()}, false);
+     
+</script>
+</HTML>
