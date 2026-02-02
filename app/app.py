@@ -1,6 +1,5 @@
 # App de Medição de Indice de Descarte
 
-
 # Imports
 import pickle
 import numpy as np
@@ -8,6 +7,9 @@ import pandas as pd
 import logging, io, os, sys
 from sklearn.ensemble import GradientBoostingClassifier
 from flask import Flask, render_template, flash, request, jsonify
+
+# pip install xgboost
+from xgboost import XGBClassifier
 
 # pip install flask_httpauth
 from flask_httpauth import HTTPBasicAuth
@@ -65,12 +67,15 @@ def mostra_imagem(linhagem, nivel_descarte):
 
 
 # Função para carregar o modelo ao inicializar a app
-@app.before_first_request
+@app.before_request
 def startup():
 	global modelo_linhagem 
 
 	# Carrega o modelo
-	modelo_linhagem = pickle.load(open("static/modelo/modelo_linhagens.p",'rb'))
+	# modelo_linhagem = pickle.load(open("static/modelo/modelo_linhagens.json",'rb'))
+
+	modelo_linhagem = XGBClassifier()
+	modelo_linhagem.load_model("../modelo/modelo_linhagens.json")
  
 
 # Função para formatar mensagem de erro
@@ -132,8 +137,12 @@ def index():
 	logging.warning("index!")
 	return render_template('index.html', qualidade_prevista = 1, image_name = '/static/imagens/imagem.jpg')
  
- 
-# Executa a pp
+@app.route("/sobre")
+@auth.login_required
+def sobre():
+	return render_template('sobre.html')
+
+# Executa app
 if __name__ == '__main__':
     app.debug = True
     app.run()
