@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<HTML>
+<HEAD>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="UTF=8">
+	<title>App de Classificação de Risco de Descarte Animal</title>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+	<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    <style>
+    .slidecontainer {
+        width: 90%;
+    }
+
+    .slider {
+        -webkit-appearance: none;
+        width: 100%;
+        height: 15px;
+        border-radius: 5px;
+        background: #d3d3d3;
+        outline: none;
+        opacity: 0.7;
+        -webkit-transition: .2s;
+        transition: opacity .2s;
+    }
+
+    .slider:hover {
+        opacity: 1;
+    }
+
+    .slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        background: #4CAF50;
+        cursor: pointer;
+    }
+
+    .slider::-moz-range-thumb {
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        background: #4CAF50;
+        cursor: pointer;
+    }
+    .footer {
+        border-top: 1px solid #eee;
+        padding: 15px;
+        background: #ffffff;
+        position: absolute;
+        width: 90%; 
+    }
+    .logo-ictb {
+        width: 100px;
+        height: 55px;
+        margin: 0 auto;
+        background-color: #fff;
+    }
+    </style>
+</HEAD>
+ 
+<BODY>
+    <div class="container">
+        <table  style="background-color:black;">
+            <tr>
+                <td>
+                    <img src="static/imagens/logo.jpeg" alt="Logo" style='padding:1px; border:0px solid #021a40; width: 300px; height: 200px'>
+                </td> 
+                <td width="100%"> 
+                    <h1><font color="white">  Medição do Índice de Descarte Animal</font></h1>
+                </td> 
+            </tr>
+        <table>
+    </div>
+    
+    <div class="container">
+        <br/>
+        <h2>Informações sobre o projeto</h2>
+        
+        <br/>
+        <label>Classificador:</label>
+        <p>XGBoost</p>
+
+        <br/>
+        <label>Parâmetros utilizados:</label>
+        <p>temperatura</p>        
+        <p>amônia</p>               
+        <p>idade</p>
+        <p>peso</p>
+        <p>sexo</p>
+        <p>fotoperíodo</p>
+        <p>ruído</p>
+        <p>intensidade luminosa</p>
+        <p>umidade</p>
+        <p>infecções</p>
+        <p>animais por gaiola</p>
+        <p>linhagem</p>
+
+        <br/>
+        <label>Linhagens utilizadas:</label>
+        <p>Black6</p>        
+        <p>Swiss</p>
+        
+        <br/>
+        <label>Classificação do risco:</label>
+        <p>Classificação mais baixa = 3, 4 e 5</p>        
+        <p>Classificação média = 6</p>
+        <p>Classificação mais alta = 7, 8 e 9</p>
+
+        <br/>
+        <label>Captação dos dados:</label>
+        <p> Arduino com uso de sensores</p>
+    </div>
+
+    <footer class="footer">
+        <div class="copyright ml-auto">
+            <a href="/">Tela Inicial</a>
+            <img src="static/imagens/logo_ictb.png" alt="navbar brand" class="navbar-brand logo-ictb" style="float:right;">
+        </div>
+    </footer>
+
+</BODY>
+</HTML>
